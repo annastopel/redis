@@ -28,6 +28,17 @@ start_server {tags {"keyspace"}} {
         r dbsize
     } {6}
 
+    test {DBSIZEALL} {
+        r select 10
+        r set dbsize test
+        assert_equal 1 [r dbsize]
+        r set dbsize2 test2
+        assert_equal 2 [r dbsize]
+        r select 9
+        assert_equal 6 [r dbsize] 
+        r dbsizeall
+    } {8}
+
     test {DEL all keys} {
         foreach key [r keys *] {r del $key}
         r dbsize

@@ -364,6 +364,9 @@ int TestIt(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     T("dbsize","");
     if (!TestAssertIntegerReply(ctx,reply,0)) goto fail;
 
+    T("dbsizeall","");
+    if (!TestAssertIntegerReply(ctx,reply,0)) goto fail;
+
     T("ping","");
     if (!TestAssertStringReply(ctx,reply,"PONG",4)) goto fail;
 
