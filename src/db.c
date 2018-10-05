@@ -803,6 +803,15 @@ void dbsizeCommand(client *c) {
     addReplyLongLong(c,dictSize(c->db->dict));
 }
 
+void dbsizeallCommand(client *c) {
+    int id = 0;
+    long long accsize = 0;
+    for (id = 0; id < server.dbnum; id++) {
+        accsize+=dictSize(server.db[id].dict);
+    }
+    addReplyLongLong(c,accsize);
+}
+
 void lastsaveCommand(client *c) {
     addReplyLongLong(c,server.lastsave);
 }
